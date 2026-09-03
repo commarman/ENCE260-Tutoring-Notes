@@ -3,7 +3,7 @@ body {
 }
 
 #morse-LED-off {
-	transition-duration: 250ms;
+	transition-duration: 100ms;
 }
 
 @keyframes fadeInPage {
@@ -39,6 +39,4 @@ li {
 
 .element {
 	grid-area: overlay;
-	width: 100%;
-	height: 100%;
 }
