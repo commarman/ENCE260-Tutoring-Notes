@@ -1,4 +1,4 @@
-const toggleLED = document.getElementById("morse-LED");
+const toggleLEDOff = document.getElementById("morse-LED-off");
 const uncodedString = "ENCE260";
 
 const morseMap = {
@@ -68,11 +68,11 @@ const convert = (str) => {
 const morseString = convert(uncodedString);
 
 const on = () => {
-    toggleLED.src = "LED-on.png";
+    toggleLEDOff.style.opacity = 0;
 }
 
 const off = () => {
-    toggleLED.src = "LED-off.png";
+    toggleLEDOff.style.opacity = 1;
 }
 
 const flash = (i, enabled) => {

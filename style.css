@@ -2,6 +2,10 @@ body {
 	animation: fadeInPage 1.2s;
 }
 
+#morse-LED-off {
+	transition-duration: 50ms;
+}
+
 @keyframes fadeInPage {
 from {
 	opacity: 0;
@@ -26,4 +30,10 @@ li {
 	font-family: Monospace;
 	font-size:20px;
 	padding: 2px;
+}
+
+.grid-container {
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: 1fr;
 }
