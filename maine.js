@@ -54,7 +54,7 @@ const unit = 200
 
 const convert = (str) => {
     let morseString = "";
-    for (const element of str) {
+    for (let element of str) {
         element = element.toLowerCase()
         if (morseMap[element]) {
             morseString += morseMap[element] + ",";
