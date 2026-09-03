@@ -79,27 +79,27 @@ const flash = (i, enabled) => {
     i = i % morseString.length;
     if (enabled) {
         off();
-        setTimeout(() => flash(i+1, false), unit);
+        setTimeout(() => {flash(i+1, false)}, unit);
     } else {
         switch (morseString[i]) {
             case '.':
                 on();
-                setTimeout(() => flash(i, true), unit);
+                setTimeout(() => {flash(i, true)}, unit);
                 break;
 
             case '-':
                 on();
-                setTimeout(() => flash(i, true), unit*3);
+                setTimeout(() => {flash(i, true)}, unit*3);
                 break;
 
             case ',':
                 off();
-                setTimeout(() => flash(i+1, false), unit*2);
+                setTimeout(() => {flash(i+1, false)}, unit*2);
                 break;
 
             case ' ':
                 off();
-                setTimeout(() => flash(i+1, false), unit*4);
+                setTimeout(() => {flash(i+1, false)}, unit*4);
                 break;
         
             default:
@@ -109,4 +109,4 @@ const flash = (i, enabled) => {
     }
 }
 
-setTimeout(() => flash(0, false), 2000);
+setTimeout(() => {flash(0, false)}, 2000);
