@@ -62,7 +62,7 @@ const convert = (str) => {
             morseString += " ";
         }
     };
-    return morseString;
+    return morseString + "   ";
 }
 
 const morseString = convert(uncodedString);
@@ -109,4 +109,4 @@ const flash = (i, enabled) => {
     }
 }
 
-flash(0, false);
+setTimeout(() => flash(0, false), 2000);
