@@ -68,11 +68,11 @@ const convert = (str) => {
 const morseString = convert(uncodedString);
 
 const on = () => {
-    LED.src = "LED-on.png";
+    toggleLED.src = "LED-on.png";
 }
 
 const off = () => {
-    LED.src = "LED-off.png";
+    toggleLED.src = "LED-off.png";
 }
 
 const flash = (i, enabled) => {
