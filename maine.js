@@ -75,9 +75,9 @@ const off = () => {
     LED.src = "LED-off.png";
 }
 
-const flash = (i, on) => {
+const flash = (i, enabled) => {
     i = i % morseString.length;
-    if (on) {
+    if (enabled) {
         off();
         setTimeout(() => flash(i+1, false), unit);
     } else {
