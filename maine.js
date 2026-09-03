@@ -40,7 +40,7 @@ const morseMap = {
     "9": "----." 
 }
 
-const unit = 400
+const unit = 250
 
 // const dit = (next) => {
 //     toggleLED.src="LED-on.png";
