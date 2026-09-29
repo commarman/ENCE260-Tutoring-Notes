@@ -110,8 +110,8 @@ const flash = (i, enabled) => {
 }
 
 setTimeout(() => {flash(0, false)}, 2000);
-
-grid = document.getElementsByClass("grid-container")[0]
+Uncaught TypeError: can't access property "style", toggleLEDOff is null
+grid = document.getElementsByClassName("grid-container")[0]
 for (let i = 0; i < 5; i++) {
     row = document.createElement('div');
     row.classList.add('grid-row');
