@@ -1,125 +1,66 @@
-const toggleLEDOff = document.getElementById("morse-LED-off");
-const uncodedString = "ENCE260";
+grid = document.getElementsByClassName("grid-container")[0];
 
-const morseMap = {
-    "a": ".-",
-    "b": "-...",
-    "c": "-.-.",
-    "d": "-..",
-    "e": ".",
-    "f": "..-.",
-    "g": "--.",
-    "h": "....",
-    "i": "..",
-    "j": ".---",
-    "k": "-.-",
-    "l": ".-..",
-    "m": "--",
-    "n": "-.",
-    "o": "---",
-    "p": ".--.",
-    "q": "--.-",
-    "r": ".-.",
-    "s": "...",
-    "t": "-",
-    "u": "..-",
-    "v": "...-",
-    "w": ".--",
-    "x": "-..-",
-    "y": "-.--",
-    "z": "--..",
-    "0": "-----",
-    "1": ".----",
-    "2": "..---",
-    "3": "...--",
-    "4": "....-", 
-    "5": ".....", 
-    "6": "-....", 
-    "7": "--...", 
-    "8": "---..", 
-    "9": "----." 
-}
+SMILEY = [16, 38, 32, 38, 16];
+BLANK = [0,0,0,0,0];
+COL1 = [127, 0,0,0,0];
+COL2 = [0,127,0,0,0];
+COL3 = [0,0,127,0,0];
+COL4 = [0,0,0,127,0];
+COL5 = [0,0,0,0,127];
 
-const unit = 250
+programs = [
+  [SMILEY, BLANK],
+  [COL1, COL2, COL3, COL4, COL5],
+  [[4,8,16,32,64],[8,16,32,64,1],[16,32,64,1,2],[32,64,1,2,4],[64,1,2,4,8],[1,2,4,8,16],[2,4,8,16,32]],
+  [
+    [0b1110000, 0b1010001, 0b0000011, 0b1000001, 0b1100000],
+    [0b1110000, 0b1010010, 0b0000110, 0b1000010, 0b1100000],
+    [0b1110000, 0b1010000, 0b0001110, 0b1000100, 0b1100000],
+    [0b1110000, 0b1010000, 0b0011100, 0b1001000, 0b1100000],
+    [0b1110000, 0b1010000, 0b0111000, 0b1010000, 0b1100000],
+    [0b1110000, 0b1010000, 0b1110000, 0b1100000, 0b1100000],
+    [0b1110000, 0b1110000, 0b1100000, 0b1100000, 0b1100000],
+    [0b10000, 0b10000, 0b00000, 0b00000, 0b00000],
+    [0b1110000, 0b1110000, 0b1100000, 0b1100000, 0b1100000],
+    [0b10000, 0b10000, 0b00000, 0b00000, 0b00000],
+    [0b1110000, 0b1110000, 0b1100000, 0b1100000, 0b1100000],
+    [0b1000000, 0b1000000, 0b00000, 0b00000, 0b00000],
+    [0b1000000, 0b1000000, 0b00000, 0b00000, 0b00000],
+    [0b1000000, 0b1000000, 0b00000, 0b00000, 0b00000],
+  ],
+];
 
-// const dit = (next) => {
-//     toggleLED.src="LED-on.png";
-//     setTimeout(() => {
-//         toggleLED.src="LED-off.png";
-//     }, 100);
-// }
+current_program = 0;
+current_frame = 0;
 
-// const dah()
-
-
-const convert = (str) => {
-    let morseString = "";
-    for (let element of str) {
-        element = element.toLowerCase()
-        if (morseMap[element]) {
-            morseString += morseMap[element] + ",";
-        } else {
-            morseString += " ";
-        }
-    };
-    return morseString + "   ";
-}
-
-const morseString = convert(uncodedString);
-
-const on = () => {
-    toggleLEDOff.style.opacity = 0;
-}
-
-const off = () => {
-    toggleLEDOff.style.opacity = 1;
-}
-
-const flash = (i, enabled) => {
-    i = i % morseString.length;
-    if (enabled) {
-        off();
-        setTimeout(() => {flash(i+1, false)}, unit);
-    } else {
-        switch (morseString[i]) {
-            case '.':
-                on();
-                setTimeout(() => {flash(i, true)}, unit);
-                break;
-
-            case '-':
-                on();
-                setTimeout(() => {flash(i, true)}, unit*3);
-                break;
-
-            case ',':
-                off();
-                setTimeout(() => {flash(i+1, false)}, unit*2);
-                break;
-
-            case ' ':
-                off();
-                setTimeout(() => {flash(i+1, false)}, unit*4);
-                break;
-        
-            default:
-                console.error("WHAT THE HECK");
-                break
-        }
-    }
-}
-
-setTimeout(() => {flash(0, false)}, 2000);
-Uncaught TypeError: can't access property "style", toggleLEDOff is null
-grid = document.getElementsByClassName("grid-container")[0]
+const columns = programs[current_program][current_frame];
+grid.textContent = '';
 for (let i = 0; i < 5; i++) {
-    row = document.createElement('div');
-    row.classList.add('grid-row');
+    column = document.createElement('div');
+    column.classList.add('grid-column');
     for (let j = 0; j < 7; j++) {
         elem = document.createElement('div');
         elem.classList.add('led');
-        elem.classList.add('led-off');
-        row.appendChild(elem);
+        elem.classList.add((columns[i] >> j) & 1 ? 'led-on' : 'led-off');
+        column.appendChild(elem);
     }
-    grid.appendChild(row);
+    grid.appendChild(column);
+}
+
+setInterval(() => {current_frame++; current_frame %= programs[current_program].length; update();}, 250);
+setInterval(() => {current_program++; current_program %= programs.length; current_frame = -1;}, 10000);
+
+const update = () => {
+  let columns = programs[current_program][current_frame];
+  let i = 0;
+  for (let column of grid.children) {
+    let j = 0;
+    for (let led of column.children) {
+      led.classList.remove('led-on'); 
+      led.classList.remove('led-off');
+      led.classList.add((columns[i] >> j) & 1 ? 'led-on' : 'led-off');
+      j++;
+    }
+    i++;
+  }
 }

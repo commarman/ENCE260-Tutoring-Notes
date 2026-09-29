@@ -33,23 +33,22 @@ li {
 }
 
 .grid-container {
-  display: grid;
-  grid-template-areas: overlay;
+  display: flex;
 }
 
 .element {
 	grid-area: overlay;
 }
 
-.grid-row {
-	margin-bottom: 2px;
+.grid-column {
 	display: flex;
-	gap: 2px;
+	flex-direction: column;
 }
 
 .led {
-	width: 5px;
-	height: 5px;
+	width: 20px;
+	height: 20px;
+	background-size: contain;
 }
 
 .led-off {
