@@ -110,3 +110,16 @@ const flash = (i, enabled) => {
 }
 
 setTimeout(() => {flash(0, false)}, 2000);
+
+grid = document.getElementsByClass("grid-container")[0]
+for (let i = 0; i < 5; i++) {
+    row = document.createElement('div');
+    row.classList.add('grid-row');
+    for (let j = 0; j < 7; j++) {
+        elem = document.createElement('div');
+        elem.classList.add('led');
+        elem.classList.add('led-off');
+        row.appendChild(elem);
+    }
+    grid.appendChild(row);
+}

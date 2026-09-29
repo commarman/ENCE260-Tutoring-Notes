@@ -40,3 +40,22 @@ li {
 .element {
 	grid-area: overlay;
 }
+
+.grid-row {
+	margin-bottom: 2px;
+	display: flex;
+	gap: 2px;
+}
+
+.led {
+	width: 5px;
+	height: 5px;
+}
+
+.led-off {
+	background-image: url('Pixel-Off.png');
+}
+
+.led-on {
+	background-image: url('Pixel-On.png');
+}
